@@ -11,7 +11,7 @@ import configData from "./settings.json";
 const config = {
   auth: {
     clientId: configData.clientId,
-    tenantUrl: configData.tenantUrl,
+    tenantUrl: configData.redirectUri,
     authority: configData.authority,
   },
 };
