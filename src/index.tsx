@@ -5,14 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
-import configData from "./settings.json";
+import { msalConfig } from "./authConfig";
 
 // Configuration object constructed.
 const config = {
   auth: {
-    clientId: configData.clientId,
-    tenantUrl: configData.redirectUri,
-    authority: configData.authority,
+    clientId: msalConfig.auth.clientId,
+    tenantUrl: msalConfig.auth.redirectUri,
+    authority: msalConfig.auth.authority,
   },
 };
 

@@ -1,8 +1,13 @@
 import React from "react";
 import "./App.css";
 import { InteractionType } from "@azure/msal-browser";
-import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
+import {
+  AuthenticatedTemplate,
+  MsalAuthenticationTemplate,
+  useMsal,
+} from "@azure/msal-react";
 import { ProfileContent } from "./ProfileService";
+import { ProtectedComponent } from "./ProtectedComponent";
 
 function WelcomeUser() {
   const { accounts } = useMsal();
@@ -12,11 +17,14 @@ function WelcomeUser() {
 
 function App() {
   return (
-    <MsalAuthenticationTemplate interactionType={InteractionType.Redirect}>
-      <p>This will only render if a user is signed-in.</p>
-      <WelcomeUser />
-      <ProfileContent />
-    </MsalAuthenticationTemplate>
+    // <MsalAuthenticationTemplate interactionType={InteractionType.Redirect}>
+    //   <p>This will only render if a user is signed-in.</p>
+    //   <WelcomeUser />
+    //   <ProfileContent />
+    // </MsalAuthenticationTemplate>
+    <AuthenticatedTemplate>
+      <ProtectedComponent />
+    </AuthenticatedTemplate>
   );
 }
 

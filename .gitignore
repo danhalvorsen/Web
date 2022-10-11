@@ -24,3 +24,5 @@ yarn-error.log*
 
 #Settings file should not be under source control
 settings.json
+authConfig.ts
+scr/authConfig.ts
