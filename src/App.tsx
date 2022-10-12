@@ -17,11 +17,6 @@ function WelcomeUser() {
 
 function App() {
   return (
-    // <MsalAuthenticationTemplate interactionType={InteractionType.Redirect}>
-    //   <p>This will only render if a user is signed-in.</p>
-    //   <WelcomeUser />
-    //   <ProfileContent />
-    // </MsalAuthenticationTemplate>
     <AuthenticatedTemplate>
       <ProtectedComponent />
     </AuthenticatedTemplate>

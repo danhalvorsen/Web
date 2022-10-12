@@ -3,7 +3,7 @@ import "./App.css";
 import { InteractionType } from "@azure/msal-browser";
 import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
 import { Button } from "react-bootstrap";
-import { loginRequest } from "./authConfig";
+import { scopes } from "./authConfig";
 
 export function ProfileContent() {
   const { instance, accounts, inProgress } = useMsal();
@@ -13,7 +13,7 @@ export function ProfileContent() {
 
   function RequestAccessToken() {
     const request = {
-      ...loginRequest,
+      ...scopes,
       account: accounts[0],
     };
 

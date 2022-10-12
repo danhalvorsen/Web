@@ -4,6 +4,7 @@ import {
 } from "@azure/msal-browser";
 import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { useEffect, useState } from "react";
+import { scopes } from "./authConfig";
 
 export const ProtectedComponent = (): JSX.Element => {
   const { instance, inProgress, accounts } = useMsal();
@@ -11,7 +12,7 @@ export const ProtectedComponent = (): JSX.Element => {
 
   useEffect(() => {
     const accessTokenRequest = {
-      scopes: ["user.read"],
+      scopes: scopes.scopes,
       account: accounts[0],
     };
     if (!apiData && inProgress === InteractionStatus.None) {

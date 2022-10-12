@@ -12,7 +12,7 @@ export const msalConfig = {
 }
 
 // Add scopes here for ID token to be used at Microsoft identity platform endpoints.
-export const loginRequest = {
+export const scopes = {
   scopes: [
     'https://halvorsenorg.onmicrosoft.com/ad5f4924-a821-4e12-8580-8d42dab855e2/api.full.access',
   ],
