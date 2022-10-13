@@ -11,7 +11,7 @@ export function ProfileContent() {
 
   const name = accounts[0] && accounts[0].name;
 
-  function RequestAccessToken() {
+  function accessTokenRequest() {
     const request = {
       ...scopes,
       account: accounts[0],
@@ -37,7 +37,7 @@ export function ProfileContent() {
       {accessToken ? (
         <p>Access Token Acquired!</p>
       ) : (
-        <Button variant="secondary" onClick={RequestAccessToken}>
+        <Button variant="secondary" onClick={accessTokenRequest}>
           Request Access Token
         </Button>
       )}
