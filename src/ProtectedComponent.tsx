@@ -3,12 +3,14 @@ import {
   InteractionStatus,
 } from "@azure/msal-browser";
 import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, createContext } from "react";
 import { scopes } from "./authConfig";
 
 export const ProtectedComponent = (): JSX.Element => {
+  const Context = createContext("Default Value");
   const { instance, inProgress, accounts } = useMsal();
   const [apiData, setApiData] = useState(null);
+  const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
     const accessTokenRequest = {
@@ -21,10 +23,12 @@ export const ProtectedComponent = (): JSX.Element => {
         .then((accessTokenResponse) => {
           // Acquire token silent success
           let accessToken = accessTokenResponse.accessToken;
+          setAccessToken(accessToken);
           console.log(accessToken);
         })
         .catch((error) => {
           if (error instanceof InteractionRequiredAuthError) {
+            setAccessToken("");
             instance.acquireTokenRedirect(accessTokenRequest);
           }
           console.log(error);
@@ -35,6 +39,7 @@ export const ProtectedComponent = (): JSX.Element => {
   return (
     <div>
       <h5>ProtectedComponent</h5>
+      <Context.Provider value="{{accessToken}}"></Context.Provider>
     </div>
   );
 };
