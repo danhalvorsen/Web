@@ -18,6 +18,7 @@ export const ProtectedComponent = (): JSX.Element => {
       account: accounts[0],
     };
     if (!apiData && inProgress === InteractionStatus.None) {
+      console.log("query from access token");
       instance
         .acquireTokenSilent(accessTokenRequest)
         .then((accessTokenResponse) => {
@@ -27,6 +28,7 @@ export const ProtectedComponent = (): JSX.Element => {
           console.log(accessToken);
         })
         .catch((error) => {
+          console.log("error");
           if (error instanceof InteractionRequiredAuthError) {
             setAccessToken("");
             instance.acquireTokenRedirect(accessTokenRequest);
