@@ -1,26 +1,20 @@
-import React from "react";
-import "./App.css";
-import { InteractionType } from "@azure/msal-browser";
 import {
   AuthenticatedTemplate,
-  MsalAuthenticationTemplate,
-  useMsal,
+  UnauthenticatedTemplate,
 } from "@azure/msal-react";
+import { PageLayout } from "./PageLayout";
 import { ProfileContent } from "./ProfileService";
-import { ProtectedComponent } from "./ProtectedComponent";
-
-function WelcomeUser() {
-  const { accounts } = useMsal();
-  const username = accounts[0].username;
-  return <p>Welcome, {username}</p>;
-}
 
 function App() {
   return (
-    <AuthenticatedTemplate>
-      <ProtectedComponent />
-    </AuthenticatedTemplate>
+    <PageLayout>
+      <AuthenticatedTemplate>
+        <ProfileContent />
+      </AuthenticatedTemplate>
+      <UnauthenticatedTemplate>
+        <p>You are not signed in! Please sign in.</p>
+      </UnauthenticatedTemplate>
+    </PageLayout>
   );
 }
-
 export default App;

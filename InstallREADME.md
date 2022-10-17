@@ -1,3 +1,5 @@
+# Guide
+This is the guide I followed when implementing the OAUTH2 for front and backend
 https://learn.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-react
 
 ### Tutorial: Sign in users and call the Microsoft Graph API from a React single-page app (SPA) using auth code flow

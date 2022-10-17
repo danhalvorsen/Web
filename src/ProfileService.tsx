@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import { InteractionType } from "@azure/msal-browser";
-import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
+
+import { useMsal } from "@azure/msal-react";
 import { Button } from "react-bootstrap";
-import { scopes } from "./authConfig";
+import { loginRequest } from "./authConfig";
 
 export function ProfileContent() {
   const { instance, accounts, inProgress } = useMsal();
@@ -11,9 +11,9 @@ export function ProfileContent() {
 
   const name = accounts[0] && accounts[0].name;
 
-  function accessTokenRequest() {
+  function RequestAccessToken() {
     const request = {
-      ...scopes,
+      ...loginRequest,
       account: accounts[0],
     };
 
@@ -37,7 +37,7 @@ export function ProfileContent() {
       {accessToken ? (
         <p>Access Token Acquired!</p>
       ) : (
-        <Button variant="secondary" onClick={accessTokenRequest}>
+        <Button variant="secondary" onClick={RequestAccessToken}>
           Request Access Token
         </Button>
       )}

@@ -11,13 +11,13 @@ import { msalConfig } from "./authConfig";
 const config = {
   auth: {
     clientId: msalConfig.auth.clientId,
-    tenantUrl: msalConfig.auth.redirectUri,
     authority: msalConfig.auth.authority,
+    tenantUrl: msalConfig.auth.redirectUri,
   },
 };
 
-console.log("The client id:" + config);
-// create PublicClientApplication instance
+console.log("The client id:" + config.auth.clientId);
+
 const publicClientApplication = new PublicClientApplication(config);
 
 const root = ReactDOM.createRoot(
