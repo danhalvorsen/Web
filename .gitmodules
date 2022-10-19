@@ -1,0 +1,3 @@
+[submodule "Canvas/canvas"]
+	path = Canvas/canvas
+	url = https://github.com/danhalvorsen/Web
