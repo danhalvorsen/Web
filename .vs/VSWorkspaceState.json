@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PureSimpleHtmlJSCSS"
+    "\\React",
+    "\\React\\my-app-with-azuread"
   ],
-  "SelectedNode": "\\PureSimpleHtmlJSCSS",
+  "SelectedNode": "\\React\\my-app-with-azuread",
   "PreviewInSolutionExplorer": false
 }

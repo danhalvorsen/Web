@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./math.js"></script>
+  <title>Dan Halvorsen - Canvas Demo</title>
+</head>
+
+<body>
+  <h1>TEST</h1>
+  <canvas id="canvas" width="1200" height="600" style="border:1px solid #d3d3d3;">
+</body>
+<script>
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  let angle = 0.0;
+  let amplitude = 50;
+  let array_of_draw_functions = [];
+  
+  async function init() {
+    
+    array_of_draw_functions.push(drawObject(0,0));
+
+    window.requestAnimationFrame(draw);
+  }
+
+  function draw() {
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.translate(canvas.width / 4, canvas.height / 4)
+    
+    
+    if(array_of_draw_functions.length > 0) {
+      array_of_draw_functions[0]();
+      angle += 0.03;
+
+    }
+      
+    
+
+    window.requestAnimationFrame(draw);
+  }
+
+  function drawObject(xx,yy) {
+    for (x = 0; x <= 100; x += 25) {
+        for (y = 100; y <= 200; y += 25) {
+          const [x, y] = calculateCircleByFrequency(amplitude, 100);
+          doDraw(xx, yy, x, y)
+        }
+      }
+  }
+
+ 
+  function calculateCircleByFrequency(amplitude, frequency, translateX = 0, translateY = 0) {
+    return calculateCircle(amplitude, 2 * Math.PI * frequency, translateX, translateY);
+  }
+  function doDraw(xx, yy, x, y) {
+    if (ctx !== undefined) {
+      ctx.beginPath();
+      ctx.moveTo(xx, yy);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+
+  }
+
+  init();
+
+</script>
+
+</html>
