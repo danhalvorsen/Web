@@ -1,15 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./App.css";
 
 import { useMsal } from "@azure/msal-react";
 import { Button } from "react-bootstrap";
 import { loginRequest } from "./authConfig";
 
-const AccessTokenContext = React.createContext<string>("");
+export type AccessToken = {
+  accessToken: string;
+};
 
-export function ProfileContent() {
+export const AccessTokenContext = React.createContext<AccessToken>({
+  accessToken: "",
+});
+
+export interface IProfileContentProps {}
+export const ProfileContent = (props: IProfileContentProps): JSX.Element => {
   const { instance, accounts, inProgress } = useMsal();
-  const [accessToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState<AccessToken>({
+    accessToken: "",
+  });
 
   const name = accounts[0] && accounts[0].name;
 
@@ -24,27 +33,34 @@ export function ProfileContent() {
       .acquireTokenSilent(request)
       .then((response) => {
         console.log(response.accessToken);
-        setAccessToken(response.accessToken);
+        const accessToken: AccessToken = {
+          accessToken: response.accessToken,
+        };
+        setAccessToken(accessToken);
       })
       .catch((e) => {
         instance.acquireTokenPopup(request).then((response) => {
-          setAccessToken(response.accessToken);
+          console.error(response.accessToken);
+          const accessToken: AccessToken = {
+            accessToken: response.accessToken,
+          };
+          setAccessToken(accessToken);
         });
       });
   }
 
   return (
-    <>
-      <AccessTokenContext.Provider value={accessToken}>
-        <h5 className="card-title">Welcome {name}</h5>
-        {accessToken ? (
-          <p>Access Token Acquired!</p>
-        ) : (
+    <AccessTokenContext.Provider value={accessToken}>
+      <h5 className="card-title">Welcome {name}</h5>
+      {accessToken.accessToken ? (
+        <p>Access Token Acquired!</p>
+      ) : (
+        <div>
           <Button variant="secondary" onClick={RequestAccessToken}>
             Request Access Token
           </Button>
-        )}
-      </AccessTokenContext.Provider>
-    </>
+        </div>
+      )}
+    </AccessTokenContext.Provider>
   );
-}
+};
