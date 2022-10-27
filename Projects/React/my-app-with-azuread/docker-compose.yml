@@ -1,0 +1,11 @@
+version: "2"
+services:
+  webapp:
+    image: sample-webapp
+    ports:
+      - "4000:3000"
+
+networks:
+  default:
+    name: dockernetwork
+    external: true

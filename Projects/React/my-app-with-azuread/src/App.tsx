@@ -11,8 +11,7 @@ function App() {
   return (
     <PageLayout>
       <AuthenticatedTemplate>
-        <ProfileContent />
-        <WeatherComponent></WeatherComponent>
+        <ProfileContent></ProfileContent>
       </AuthenticatedTemplate>
 
       <UnauthenticatedTemplate>

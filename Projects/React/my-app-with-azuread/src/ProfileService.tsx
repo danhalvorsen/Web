@@ -4,6 +4,7 @@ import "./App.css";
 import { useMsal } from "@azure/msal-react";
 import { Button } from "react-bootstrap";
 import { loginRequest } from "./authConfig";
+import { WeatherComponent } from "./WeatherComponent";
 
 export type AccessToken = {
   accessToken: string;
@@ -13,8 +14,10 @@ export const AccessTokenContext = React.createContext<AccessToken>({
   accessToken: "",
 });
 
-export interface IProfileContentProps {}
-export const ProfileContent = (props: IProfileContentProps): JSX.Element => {
+export interface IProfileContentProps {
+  children: JSX.Element | JSX.Element[];
+}
+export const ProfileContent = (): JSX.Element => {
   const { instance, accounts, inProgress } = useMsal();
   const [accessToken, setAccessToken] = useState<AccessToken>({
     accessToken: "",
@@ -53,7 +56,10 @@ export const ProfileContent = (props: IProfileContentProps): JSX.Element => {
     <AccessTokenContext.Provider value={accessToken}>
       <h5 className="card-title">Welcome {name}</h5>
       {accessToken.accessToken ? (
-        <p>Access Token Acquired!</p>
+        <>
+          <p>Access Token Acquired!</p>
+          <WeatherComponent />
+        </>
       ) : (
         <div>
           <Button variant="secondary" onClick={RequestAccessToken}>
