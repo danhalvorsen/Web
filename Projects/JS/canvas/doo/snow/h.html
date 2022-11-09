@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <script src="" async defer></script>
+    <canvas
+      id="canvas"
+      width="400"
+      height="400"
+      style="border: 1px solid #000000"
+    >
+    </canvas>
+  </body>
+  <script>
+    const length = 50;
+    const translateX = 50;
+    const translateY = 50;
+
+    var alternate = true;
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+
+    ctx.strokeStyle = "#FF0000";
+    ctx.translate(100,100);
+    ctx.moveTo(0,0)
+    ctx.lineTo(150,0)  
+    ctx.translate(150,0)
+    ctx.stroke();
+    
+    flowerWithDots();
+  
+    function flowerWithDots() {
+      for(let generation=0; generation < 4; generation++)
+      {
+        ctx.save();
+        LineSegWithDot(generation+1) 
+      }
+        ctx.restore();
+        ctx.restore();
+        ctx.strokeStyle = "#00F";
+        ctx.moveTo(length, 0);
+        ctx.lineTo(length*2, 0);
+        ctx.stroke();
+    }
+    
+    function LineSegWithDot(generation) {
+      let angle = -Math.PI/6
+      ctx.rotate(angle);
+      
+      ctx.strokeStyle = "#0A0";
+      ctx.moveTo(0, 0);
+      ctx.lineTo(length, 0);
+      ctx.moveTo(length, 0);
+      ctx.arc(length+10,0,5,0, 2*Math.PI)
+
+      console.log(`Generation:${generation} Angular:${(180/Math.PI) * angle}`);
+    }
+
+
+    function toRad(deg) {
+      return (Math.PI / 180) * deg;
+    }
+    function seg(len, x, y, rotate) {
+      ctx.translate(x, y);
+      ctx.rotate(rotate);
+      ctx.moveTo(0, 0);
+      ctx.lineTo(len, 0);
+    }
+  </script>
+</html>
